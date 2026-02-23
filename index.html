@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymarket Master - הקורס המקיף לשוקי חיזוי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #2563EB;
+  --primary-dark: #1D4ED8;
+  --primary-light: #DBEAFE;
+  --accent: #F59E0B;
+  --accent-dark: #D97706;
+  --dark: #0F172A;
+  --gray-900: #1E293B;
+  --gray-700: #334155;
+  --gray-500: #64748B;
+  --gray-300: #CBD5E1;
+  --gray-100: #F1F5F9;
+  --white: #FFFFFF;
+  --success: #10B981;
+  --gradient-hero: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #1E40AF 100%);
+  --gradient-cta: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+  --gradient-card: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+  --radius: 16px;
+}
+body {
+  font-family: 'Heebo', sans-serif;
+  color: var(--gray-900);
+  background: var(--white);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ===== UTILITY ===== */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 100px 0; }
+.text-center { text-align: center; }
+.badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.badge-gold {
+  background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+  color: var(--accent-dark);
+}
+
+/* ===== FLOATING NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1140px; margin: 0 auto; padding: 14px 24px;
+}
+.nav-logo {
+  font-size: 22px; font-weight: 800; color: var(--dark);
+}
+.nav-logo span { color: var(--primary); }
+.nav-cta {
+  background: var(--primary);
+  color: white;
+  padding: 10px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--gradient-hero);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-content { color: white; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+.hero-badge svg { width: 16px; height: 16px; }
+.hero h1 {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 20px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 36px;
+  line-height: 1.8;
+  max-width: 520px;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gradient-cta);
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 18px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(245,158,11,0.5); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hero-stat-num {
+  font-size: 32px; font-weight: 900;
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+/* Hero Visual */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.hero-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 460px;
+}
+.hero-card-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.market-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s;
+}
+.market-item:hover { background: rgba(255,255,255,0.1); }
+.market-name { color: rgba(255,255,255,0.9); font-size: 15px; font-weight: 500; }
+.market-odds {
+  font-weight: 800;
+  font-size: 18px;
+  padding: 6px 16px;
+  border-radius: 8px;
+}
+.market-green { background: rgba(16,185,129,0.15); color: #34D399; }
+.market-blue { background: rgba(37,99,235,0.15); color: #60A5FA; }
+.market-amber { background: rgba(245,158,11,0.15); color: #FBBF24; }
+.profit-bar {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.profit-label { color: rgba(255,255,255,0.5); font-size: 13px; }
+.profit-value { color: #34D399; font-size: 36px; font-weight: 900; margin-top: 4px; }
+.profit-sub { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 4px; }
+
+/* ===== SOCIAL PROOF BAR ===== */
+.social-proof {
+  background: var(--gray-100);
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.proof-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gray-500);
+  font-size: 15px;
+  font-weight: 500;
+}
+.proof-item svg { width: 22px; height: 22px; color: var(--primary); flex-shrink: 0; }
+
+/* ===== PROBLEM ===== */
+.problem { background: var(--white); }
+.problem-header { max-width: 700px; margin: 0 auto 60px; }
+.problem-header h2 {
+  font-size: 40px; font-weight: 900; color: var(--dark);
+  margin-bottom: 16px; line-height: 1.3;
+}
+.problem-header p { font-size: 18px; color: var(--gray-500); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.problem-card {
+  background: var(--gradient-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  transition: all 0.3s;
+}
+.problem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.problem-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+.problem-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+.problem-card p { font-size: 15px; color: var(--gray-500); line-height: 1.7; }
+
+/* ===== WHAT IS POLYMARKET ===== */
+.what-is {
+  background: linear-gradient(180deg, var(--gray-100) 0%, var(--white) 100%);
+}
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.what-content h2 {
+  font-size: 40px; font-weight: 900; color: var(--dark);
+  margin-bottom: 20px; line-height: 1.3;
+}
+.what-content p { font-size: 17px; color: var(--gray-500); margin-bottom: 16px; line-height: 1.8; }
+.what-features { list-style: none; margin-top: 28px; }
+.what-features li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 12px 0;
+  font-size: 16px;
+  color: var(--gray-700);
+  font-weight: 500;
+}
+.what-features li .check {
+  width: 28px; height: 28px; min-width: 28px;
+  background: rgba(16,185,129,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--success);
+  font-size: 14px;
+  margin-top: 2px;
+}
+.what-visual {
+  background: var(--gradient-hero);
+  border-radius: 24px;
+  padding: 48px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.what-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(37,99,235,0.3) 0%, transparent 60%);
+}
+.what-visual-inner { position: relative; z-index: 1; }
+.what-visual h3 { font-size: 22px; font-weight: 800; margin-bottom: 32px; }
+.what-step {
+  display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start;
+}
+.what-step-num {
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 12px;
+  background: rgba(245,158,11,0.2);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 18px;
+}
+.what-step-text h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.what-step-text p { font-size: 14px; color: rgba(255,255,255,0.6); }
+
+/* ===== CURRICULUM ===== */
+.curriculum { background: var(--white); }
+.curriculum-header { max-width: 700px; margin: 0 auto 60px; }
+.curriculum-header h2 {
+  font-size: 40px; font-weight: 900; color: var(--dark);
+  margin-bottom: 16px; line-height: 1.3;
+}
+.curriculum-header p { font-size: 18px; color: var(--gray-500); }
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.module-card {
+  background: var(--gradient-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius);
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.module-top {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
+}
+.module-num {
+  width: 48px; height: 48px; min-width: 48px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 20px;
+}
+.module-title { font-size: 19px; font-weight: 800; color: var(--dark); }
+.module-lessons {
+  list-style: none;
+}
+.module-lessons li {
+  padding: 8px 0;
+  font-size: 15px;
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.module-lessons li:last-child { border-bottom: none; }
+.module-lessons li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; }
+
+/* ===== FOR WHO ===== */
+.for-who {
+  background: linear-gradient(180deg, var(--gray-100) 0%, var(--white) 100%);
+}
+.for-who-header { max-width: 700px; margin: 0 auto 60px; }
+.for-who-header h2 { font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 16px; }
+.for-who-header p { font-size: 18px; color: var(--gray-500); }
+.for-who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.for-who-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.for-who-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.for-who-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+.for-who-card h3 { font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+.for-who-card p { font-size: 15px; color: var(--gray-500); line-height: 1.7; }
+
+/* ===== INSTRUCTOR ===== */
+.instructor { background: var(--white); }
+.instructor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.instructor-visual {
+  background: var(--gradient-hero);
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+  color: white;
+}
+.instructor-avatar {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 4px solid rgba(245,158,11,0.4);
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+}
+.instructor-name { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+.instructor-role { font-size: 16px; color: rgba(255,255,255,0.6); }
+.instructor-stats-row {
+  display: flex; justify-content: center; gap: 32px; margin-top: 28px;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.instructor-stat { text-align: center; }
+.instructor-stat-num { font-size: 24px; font-weight: 900; color: var(--accent); }
+.instructor-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+.instructor-content h2 {
+  font-size: 40px; font-weight: 900; color: var(--dark);
+  margin-bottom: 20px; line-height: 1.3;
+}
+.instructor-content p { font-size: 17px; color: var(--gray-500); margin-bottom: 16px; line-height: 1.8; }
+.instructor-highlights { margin-top: 24px; list-style: none; }
+.instructor-highlights li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  font-size: 16px; color: var(--gray-700); font-weight: 600;
+}
+.instructor-highlights li span {
+  color: var(--success); font-size: 18px;
+}
+
+/* ===== BONUSES ===== */
+.bonuses {
+  background: linear-gradient(180deg, var(--gray-100) 0%, var(--white) 100%);
+}
+.bonuses-header { max-width: 700px; margin: 0 auto 60px; }
+.bonuses-header h2 { font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 16px; }
+.bonuses-header p { font-size: 18px; color: var(--gray-500); }
+.bonuses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.bonus-card {
+  background: white;
+  border: 2px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.bonus-card::before {
+  content: 'בונוס';
+  position: absolute; top: 16px; left: 16px;
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+.bonus-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+.bonus-icon { font-size: 44px; margin-bottom: 16px; margin-top: 12px; }
+.bonus-card h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+.bonus-card p { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+.bonus-value { font-size: 14px; color: var(--accent-dark); font-weight: 700; margin-top: 12px; }
+
+/* ===== TESTIMONIALS ===== */
+.testimonials { background: var(--white); }
+.testimonials-header { max-width: 700px; margin: 0 auto 60px; }
+.testimonials-header h2 { font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 16px; }
+.testimonials-header p { font-size: 18px; color: var(--gray-500); }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--gradient-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.3s;
+}
+.testimonial-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.testimonial-stars { color: var(--accent); font-size: 18px; margin-bottom: 16px; letter-spacing: 2px; }
+.testimonial-text { font-size: 15px; color: var(--gray-700); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px;
+}
+.testimonial-name { font-weight: 700; font-size: 15px; color: var(--dark); }
+.testimonial-role { font-size: 13px; color: var(--gray-500); }
+
+/* ===== PRICING ===== */
+.pricing {
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+.pricing::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(245,158,11,0.1) 0%, transparent 60%);
+}
+.pricing-inner { position: relative; z-index: 1; }
+.pricing-header { max-width: 700px; margin: 0 auto 60px; color: white; }
+.pricing-header h2 { font-size: 40px; font-weight: 900; margin-bottom: 16px; }
+.pricing-header p { font-size: 18px; color: rgba(255,255,255,0.7); }
+.pricing-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+}
+.pricing-popular {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  background: var(--gradient-cta);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 8px 28px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+.pricing-title { font-size: 24px; font-weight: 800; color: var(--dark); margin-top: 16px; margin-bottom: 8px; }
+.pricing-desc { font-size: 15px; color: var(--gray-500); margin-bottom: 32px; }
+.pricing-amount {
+  display: flex; align-items: baseline; justify-content: center; gap: 4px;
+  margin-bottom: 8px;
+}
+.pricing-currency { font-size: 28px; font-weight: 700; color: var(--dark); }
+.pricing-number { font-size: 72px; font-weight: 900; color: var(--dark); line-height: 1; }
+.pricing-period { font-size: 14px; color: var(--gray-500); margin-bottom: 32px; }
+.pricing-features { list-style: none; margin-bottom: 36px; text-align: right; }
+.pricing-features li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  font-size: 16px; color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+}
+.pricing-features li:last-child { border: none; }
+.pricing-features li svg { width: 20px; height: 20px; color: var(--success); flex-shrink: 0; }
+.pricing-cta {
+  display: block;
+  width: 100%;
+  background: var(--gradient-cta);
+  color: white;
+  padding: 18px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+}
+.pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(245,158,11,0.5); }
+.pricing-guarantee {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 20px;
+  font-size: 14px; color: var(--gray-500);
+}
+.pricing-guarantee svg { width: 18px; height: 18px; color: var(--success); }
+
+/* ===== FAQ ===== */
+.faq { background: var(--white); }
+.faq-header { max-width: 700px; margin: 0 auto 60px; }
+.faq-header h2 { font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 16px; }
+.faq-header p { font-size: 18px; color: var(--gray-500); }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.faq-item:hover { border-color: var(--primary); }
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark);
+  background: white;
+  border: none;
+  width: 100%;
+  text-align: right;
+  font-family: 'Heebo', sans-serif;
+}
+.faq-question svg {
+  width: 20px; height: 20px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  color: var(--primary);
+}
+.faq-item.active .faq-question svg { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-answer-inner {
+  padding: 0 24px 20px;
+  font-size: 15px;
+  color: var(--gray-500);
+  line-height: 1.8;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+  padding: 80px 0;
+}
+.final-cta-inner {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.final-cta h2 {
+  font-size: 36px; font-weight: 900; color: var(--dark);
+  margin-bottom: 16px;
+}
+.final-cta p {
+  font-size: 18px; color: var(--gray-500);
+  margin-bottom: 32px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.5);
+  padding: 40px 0;
+  text-align: center;
+  font-size: 14px;
+}
+.footer a { color: var(--accent); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-grid,
+  .what-grid,
+  .instructor-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .hero-visual { order: -1; }
+  .problem-grid,
+  .for-who-grid,
+  .bonuses-grid,
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  h2 { font-size: 30px !important; }
+  .pricing-number { font-size: 56px; }
+  .hero-buttons { flex-direction: column; }
+  .proof-inner { gap: 24px; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(245,158,11,0.4); }
+  50% { box-shadow: 0 4px 40px rgba(245,158,11,0.6); }
+}
+.pulse-btn { animation: pulse-glow 2s infinite; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">Polymarket <span>Master</span></div>
+    <button class="nav-cta" onclick="document.querySelector('.pricing').scrollIntoView({behavior:'smooth'})">להרשמה לקורס</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          קורס חדש 2026
+        </div>
+        <h1>
+          למד לסחור<br>
+          <span class="highlight">בשווקי חיזוי</span><br>
+          כמו מקצוען
+        </h1>
+        <p class="hero-sub">
+          הקורס המקיף והמעשי הראשון בישראל לפלטפורמת Polymarket —
+          מהצעד הראשון ועד לאסטרטגיות מתקדמות שיעזרו לך להרוויח מניתוח אירועים גלובליים.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary pulse-btn" onclick="document.querySelector('.pricing').scrollIntoView({behavior:'smooth'})">
+            אני רוצה להצטרף
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="btn-secondary" onclick="document.querySelector('.curriculum').scrollIntoView({behavior:'smooth'})">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M10 8l6 4-6 4V8z"/></svg>
+            לצפייה בתוכן הקורס
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">5</div>
+            <div class="hero-stat-label">פרקים מקיפים</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">40+</div>
+            <div class="hero-stat-label">שיעורים מעשיים</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label">חודשי גישה לרדאר הכסף</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card" style="animation: float 6s ease-in-out infinite;">
+          <div class="hero-card-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            שווקים פעילים
+          </div>
+          <div class="market-item">
+            <span class="market-name">בחירות לנשיאות ארה״ב</span>
+            <span class="market-odds market-green">72¢</span>
+          </div>
+          <div class="market-item">
+            <span class="market-name">ריבית הפד - מרץ 2026</span>
+            <span class="market-odds market-blue">45¢</span>
+          </div>
+          <div class="market-item">
+            <span class="market-name">AI - השקה חדשה Q1</span>
+            <span class="market-odds market-amber">63¢</span>
+          </div>
+          <div class="market-item">
+            <span class="market-name">גמר ה-Champions League</span>
+            <span class="market-odds market-green">38¢</span>
+          </div>
+          <div class="profit-bar">
+            <div class="profit-label">רווח פוטנציאלי מהתיק</div>
+            <div class="profit-value">+340%</div>
+            <div class="profit-sub">בהתבסס על אסטרטגיות הקורס</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        מאות תלמידים בקורסים של יקיר עבאדי
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        גישה לצמיתות
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        עדכונים שוטפים
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        מערכת "רדאר הכסף" כלולה
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SECTION -->
+<section class="section" style="background: var(--white); padding-bottom: 60px;">
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="fade-up">
+      <span class="badge">צפו בהסבר</span>
+      <h2 style="font-size: 36px; font-weight: 900; color: var(--dark); margin-bottom: 24px;">יקיר מסביר למה Polymarket זה הדבר הבא</h2>
+      <!-- VIDEO PLACEHOLDER — Replace the src below with the actual YouTube/Vimeo embed URL -->
+      <div id="video-placeholder" style="position: relative; width: 100%; padding-bottom: 56.25%; background: var(--gradient-hero); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-xl);">
+        <!-- OPTION 1: Replace this entire div content with an iframe like:
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
+        -->
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(245,158,11,0.9); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 30px rgba(245,158,11,0.4); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <p style="color: rgba(255,255,255,0.7); margin-top: 16px; font-size: 16px; font-weight: 600;">לחץ לצפייה בסרטון</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem section">
+  <div class="container">
+    <div class="problem-header text-center fade-up">
+      <span class="badge">למה עכשיו?</span>
+      <h2>רוב האנשים מפספסים את ההזדמנות הכי גדולה באינטרנט</h2>
+      <p>שוקי חיזוי הם הדבר הגדול הבא — אבל בלי ידע, הסיכוי שלך להפסיד כסף גבוה מאוד</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card fade-up">
+        <div class="problem-icon" style="background: rgba(239,68,68,0.1);">😵</div>
+        <h3>מבולבלים מהממשק</h3>
+        <p>הפלטפורמה מלאה במספרים, גרפים ומונחים שנראים כמו שפה זרה. בלי הכוונה נכונה, קל לעשות טעויות יקרות.</p>
+      </div>
+      <div class="problem-card fade-up" style="transition-delay: 0.1s;">
+        <div class="problem-icon" style="background: rgba(245,158,11,0.1);">📉</div>
+        <h3>סוחרים על בסיס תחושות</h3>
+        <p>רוב האנשים קונים ומוכרים על סמך אינטואיציה ולא על סמך ניתוח מעמיק. התוצאה? הפסדים שנגררים.</p>
+      </div>
+      <div class="problem-card fade-up" style="transition-delay: 0.2s;">
+        <div class="problem-icon" style="background: rgba(37,99,235,0.1);">🔒</div>
+        <h3>לא יודעים איפה להתחיל</h3>
+        <p>אין מדריך בעברית, אין קורס מסודר. התוכן באינטרנט מפוזר, לא מעודכן, ולא מותאם למתחילים.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS POLYMARKET -->
+<section class="what-is section">
+  <div class="container">
+    <div class="what-grid">
+      <div class="what-content fade-up">
+        <span class="badge">מה זה בכלל?</span>
+        <h2>Polymarket — פלטפורמת שוקי החיזוי הגדולה בעולם</h2>
+        <p>
+          Polymarket היא פלטפורמה מבוססת בלוקצ׳יין שמאפשרת לך לסחור באירועים אמיתיים מהעולם — פוליטיקה, כלכלה, טכנולוגיה, ספורט ועוד.
+        </p>
+        <p>
+          במקום לנחש, אתה קונה ומוכר "מניות" של תוצאות. אם הניתוח שלך נכון — אתה מרוויח. וזה בדיוק מה שהקורס הזה ילמד אותך.
+        </p>
+        <ul class="what-features">
+          <li><span class="check">✓</span> פלטפורמה עם מחזור מסחר של מיליארדי דולרים</li>
+          <li><span class="check">✓</span> פתוחה 24/7 — סחור מכל מקום בעולם</li>
+          <li><span class="check">✓</span> אירועים מכל התחומים — מפוליטיקה ועד קריפטו</li>
+          <li><span class="check">✓</span> הזדמנות לרווחים משמעותיים עם ניתוח נכון</li>
+        </ul>
+      </div>
+      <div class="what-visual fade-up">
+        <div class="what-visual-inner">
+          <h3>איך Polymarket עובד?</h3>
+          <div class="what-step">
+            <div class="what-step-num">1</div>
+            <div class="what-step-text">
+              <h4>בחר אירוע</h4>
+              <p>בחירות, ריבית, השקות טכנולוגיה ועוד</p>
+            </div>
+          </div>
+          <div class="what-step">
+            <div class="what-step-num">2</div>
+            <div class="what-step-text">
+              <h4>נתח את ההסתברויות</h4>
+              <p>השתמש בכלים ובאסטרטגיות מהקורס</p>
+            </div>
+          </div>
+          <div class="what-step">
+            <div class="what-step-num">3</div>
+            <div class="what-step-text">
+              <h4>קנה או מכור מניות</h4>
+              <p>קנה ב-Yes או ב-No לפי הניתוח שלך</p>
+            </div>
+          </div>
+          <div class="what-step">
+            <div class="what-step-num">4</div>
+            <div class="what-step-text">
+              <h4>הרוויח מהתוצאה</h4>
+              <p>כל מניה מנצחת שווה $1 — הרווח הוא ההפרש</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum section" id="curriculum">
+  <div class="container">
+    <div class="curriculum-header text-center fade-up">
+      <span class="badge">תוכן הקורס</span>
+      <h2>5 פרקים שיהפכו אותך מצופה לסוחר מקצועי</h2>
+      <p>מעבר מחשיבה של "מהמר" לחשיבה של סוחר שמנתח הסתברויות ודאטה</p>
+    </div>
+    <div class="modules-grid">
+
+      <div class="module-card fade-up">
+        <div class="module-top">
+          <div class="module-num">1</div>
+          <div class="module-title">יסודות העולם החדש</div>
+        </div>
+        <ul class="module-lessons">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> מהם שווקי חיזוי וחוזים בינאריים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> המתמטיקה של האמת — מסנטים להסתברויות</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> הימור מול מסחר — משוואת התוחלת</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> השחקנים במגרש: הדגים, הבוטים והכרישים</li>
+        </ul>
+      </div>
+
+      <div class="module-card fade-up" style="transition-delay: 0.1s;">
+        <div class="module-top">
+          <div class="module-num">2</div>
+          <div class="module-title">התשתית הטכנולוגית</div>
+        </div>
+        <ul class="module-lessons">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> שוברים את מחסום הפחד מקריפטו</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> פתיחת ארנק MetaMask — הדרכה מוקלטת</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> הפקדת USDC דרך חלפנים ישראלים מפוקחים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> אבטחת מידע וחוקי הברזל</li>
+        </ul>
+      </div>
+
+      <div class="module-card fade-up" style="transition-delay: 0.15s;">
+        <div class="module-top">
+          <div class="module-num">3</div>
+          <div class="module-title">חדר המלחמה — מערכת המסחר</div>
+        </div>
+        <ul class="module-lessons">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> ניתוח דף שוק וקריאת חוקי החוזה</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> ספר הפקודות, הספרד וה-Slippage</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> פקודות Market vs. Limit — השיטה של המקצוענים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> ניהול פוזיציה, מימוש רווחים ואיסוף זכיות</li>
+        </ul>
+      </div>
+
+      <div class="module-card fade-up" style="transition-delay: 0.2s;">
+        <div class="module-top">
+          <div class="module-num">4</div>
+          <div class="module-title">מערכת "רדאר הכסף" — היתרון הלא הוגן</div>
+        </div>
+        <ul class="module-lessons">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> הדשבורד הישראלי — TrueOdds בעברית</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> רדאר הכרישים — מעקב אחרי הכסף החכם</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> Copy Trading — העתקת מהלכים של המנצחים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> שימוש ב-AI כאנליסט פרטי</li>
+        </ul>
+      </div>
+
+      <div class="module-card fade-up" style="transition-delay: 0.25s; grid-column: 1 / -1; max-width: 580px; margin: 0 auto;">
+        <div class="module-top">
+          <div class="module-num">5</div>
+          <div class="module-title">אסטרטגיות מתקדמות וניהול סיכונים</div>
+        </div>
+        <ul class="module-lessons">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> ארביטראז׳ מידע — האנטומיה של עסקה מנצחת</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> Hedging — פולימרקט כ"חברת ביטוח" לתיק שלך</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> חוק ה-5% הקדוש ופסיכולוגיית מסחר</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg> מיסוי, משיכת רווחים ובניית שגרת סוחר</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who section">
+  <div class="container">
+    <div class="for-who-header text-center fade-up">
+      <span class="badge">למי הקורס מיועד?</span>
+      <h2>הקורס מתאים לך אם...</h2>
+      <p>לא משנה מאיפה אתה מתחיל — הקורס ייקח אותך קדימה</p>
+    </div>
+    <div class="for-who-grid">
+      <div class="for-who-card fade-up">
+        <div class="for-who-icon">🚀</div>
+        <h3>מתחילים לגמרי</h3>
+        <p>מעולם לא נגעת בשוקי חיזוי? מעולה. הקורס מתחיל מאפס ומלווה אותך צעד אחר צעד עד שתרגיש בטוח.</p>
+      </div>
+      <div class="for-who-card fade-up" style="transition-delay: 0.1s;">
+        <div class="for-who-icon">📊</div>
+        <h3>סוחרים מנוסים</h3>
+        <p>כבר סוחר בבורסה או בקריפטו? הקורס יעזור לך לגוון את התיק שלך ולנצל הזדמנויות חדשות בשוקי חיזוי.</p>
+      </div>
+      <div class="for-who-card fade-up" style="transition-delay: 0.2s;">
+        <div class="for-who-icon">🧠</div>
+        <h3>חובבי ניתוח וחדשות</h3>
+        <p>אתה עוקב אחרי פוליטיקה, כלכלה וטכנולוגיה? הפוך את הידע שלך לכסף על ידי מסחר באירועים שאתה מכיר.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTOR -->
+<section class="instructor section">
+  <div class="container">
+    <div class="instructor-grid">
+      <div class="instructor-visual fade-up">
+        <div class="instructor-avatar">👨‍🏫</div>
+        <div class="instructor-name">יקיר עבאדי</div>
+        <div class="instructor-role">מומחה שוקי הון ושוקי חיזוי</div>
+        <div class="instructor-stats-row">
+          <div class="instructor-stat">
+            <div class="instructor-stat-num">1,000+</div>
+            <div class="instructor-stat-label">תלמידים</div>
+          </div>
+          <div class="instructor-stat">
+            <div class="instructor-stat-num">5+</div>
+            <div class="instructor-stat-label">שנות ניסיון</div>
+          </div>
+          <div class="instructor-stat">
+            <div class="instructor-stat-num">3</div>
+            <div class="instructor-stat-label">קורסים</div>
+          </div>
+        </div>
+      </div>
+      <div class="instructor-content fade-up">
+        <span class="badge">המרצה שלך</span>
+        <h2>למה ללמוד דווקא מיקיר?</h2>
+        <p>
+          יקיר עבאדי הוא אחד המומחים המובילים בישראל בתחום שוקי ההון. עם ניסיון רב בשווקים הפיננסיים, יקיר הכשיר מאות תלמידים שהפכו לסוחרים עצמאיים.
+        </p>
+        <p>
+          הקורס הזה מביא את כל הידע והניסיון שצבר יקיר לתחום החדש והמרתק של שוקי חיזוי — בצורה מעשית, מובנית ונגישה.
+        </p>
+        <ul class="instructor-highlights">
+          <li><span>✅</span> יוצר קורס TradeMaster לשוק ההון</li>
+          <li><span>✅</span> מלמד בגישה מעשית ולא תיאורטית</li>
+          <li><span>✅</span> ליווי אישי וזמין לתלמידים</li>
+          <li><span>✅</span> עדכונים שוטפים על שינויים בשוק</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RADAR MONEY SYSTEM -->
+<section class="bonuses section" id="radar">
+  <div class="container">
+    <div class="bonuses-header text-center fade-up">
+      <span class="badge badge-gold">הכלי הסודי</span>
+      <h2>מערכת "רדאר הכסף" — היתרון הלא הוגן שלך</h2>
+      <p>כל תלמיד מקבל 6 חודשי גישה למערכת TrueOdds — הדשבורד הישראלי שעוקב אחרי הכסף החכם</p>
+    </div>
+
+    <!-- Radar Dashboard Mock -->
+    <div style="max-width: 800px; margin: 0 auto 48px; background: var(--gradient-hero); border-radius: 24px; padding: 40px; color: white; position: relative; overflow: hidden;" class="fade-up">
+      <div style="position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(245,158,11,0.15) 0%, transparent 60%);"></div>
+      <div style="position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 28px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245,158,11,0.2); display: flex; align-items: center; justify-content: center; font-size: 22px;">📡</div>
+          <div>
+            <div style="font-weight: 800; font-size: 20px;">רדאר הכסף — TrueOdds</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.5);">דשבורד בעברית • עדכון בזמן אמת</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px; text-align: center;">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">שווקים במעקב</div>
+            <div style="font-size: 28px; font-weight: 900; color: #FBBF24;">147</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px; text-align: center;">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">התראות הכסף החכם</div>
+            <div style="font-size: 28px; font-weight: 900; color: #34D399;">12</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px; text-align: center;">
+            <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">ארנקים מנוטרים</div>
+            <div style="font-size: 28px; font-weight: 900; color: #60A5FA;">2,340</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 14px;">🐋</span>
+              <span style="font-size: 14px; font-weight: 600;">לוויתן מנצח — קנה $45K בשוק הריבית</span>
+            </div>
+            <span style="font-size: 13px; color: #34D399; font-weight: 700;">לפני 3 דק׳</span>
+          </div>
+          <div style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 14px;">🎯</span>
+              <span style="font-size: 14px; font-weight: 600;">צלף — מהלך פנימי בשוק הבחירות</span>
+            </div>
+            <span style="font-size: 13px; color: #FBBF24; font-weight: 700;">לפני 8 דק׳</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonuses-grid">
+      <div class="bonus-card fade-up">
+        <div class="bonus-icon">🐋</div>
+        <h3>רדאר הכרישים</h3>
+        <p>מעקב בזמן אמת אחרי הארנקים הגדולים — צלפים, לוויתנים מנצחים ומזיזי שוק. תדע מה הכסף החכם עושה לפני כולם.</p>
+        <div class="bonus-value">6 חודשי גישה כלולים</div>
+      </div>
+      <div class="bonus-card fade-up" style="transition-delay: 0.1s;">
+        <div class="bonus-icon">📊</div>
+        <h3>דשבורד בעברית</h3>
+        <p>כל השווקים הרלוונטיים לישראלים מרוכזים במקום אחד — בעברית, עם סינון אנליטי וממשק נקי.</p>
+        <div class="bonus-value">6 חודשי גישה כלולים</div>
+      </div>
+      <div class="bonus-card fade-up" style="transition-delay: 0.2s;">
+        <div class="bonus-icon">🤖</div>
+        <h3>אנליסט AI פרטי</h3>
+        <p>כלי בינה מלאכותית שנותן תקציר אובייקטיבי של כל אירוע — חדשות, ניתוח והמלצות תוך שניות.</p>
+        <div class="bonus-value">6 חודשי גישה כלולים</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials section">
+  <div class="container">
+    <div class="testimonials-header text-center fade-up">
+      <span class="badge">מה אומרים התלמידים</span>
+      <h2>תלמידים שכבר לומדים מיקיר</h2>
+      <p>ביקורות מתלמידים אמיתיים מהקורסים של יקיר עבאדי</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">
+          "יקיר מצליח להסביר דברים מורכבים בצורה פשוטה ומעשית. אחרי הקורס שלו הרגשתי בטוח לגמרי לסחור בעצמי. ממליץ בחום!"
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ד</div>
+          <div>
+            <div class="testimonial-name">דניאל כ.</div>
+            <div class="testimonial-role">תלמיד קורס TradeMaster</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.1s;">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">
+          "הגישה של יקיר היא בדיוק מה שחיפשתי — לא תיאוריה מיותרת, אלא כלים מעשיים שאני יכולה ליישם ישר. איכות הקורס מטורפת."
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ש</div>
+          <div>
+            <div class="testimonial-name">שירה מ.</div>
+            <div class="testimonial-role">תלמידת קורס TradeMaster</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.2s;">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">
+          "ניסיתי ללמוד לבד מיוטיוב ונכשלתי. הקורס של יקיר סידר לי את הכל בראש ונתן לי את הביטחון להתחיל. שווה כל שקל."
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">א</div>
+          <div>
+            <div class="testimonial-name">אבי ר.</div>
+            <div class="testimonial-role">תלמיד קורס TradeMaster</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing section" id="pricing">
+  <div class="container">
+    <div class="pricing-inner">
+      <div class="pricing-header text-center">
+        <span class="badge badge-gold">מחיר השקה מיוחד</span>
+        <h2>הצטרף עכשיו למחיר מיוחד</h2>
+        <p>מחיר השקה לזמן מוגבל — אחרי זה המחיר עולה</p>
+      </div>
+      <div class="pricing-card fade-up">
+        <div class="pricing-popular">🔥 הכי פופולרי</div>
+        <div class="pricing-title">Polymarket Master</div>
+        <div class="pricing-desc">גישה מלאה לקורס + מערכת רדאר הכסף</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">₪</span>
+          <span class="pricing-number">799</span>
+        </div>
+        <div class="pricing-period">תשלום חד-פעמי • גישה לצמיתות לקורס</div>
+        <ul class="pricing-features">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            5 פרקים מקיפים + למעלה מ-40 שיעורים
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            6 חודשי גישה למערכת "רדאר הכסף" (TrueOdds)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            מעקב אחרי הכסף החכם בזמן אמת
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            דשבורד בעברית עם סינון אנליטי
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            גישה לצמיתות לתוכן הקורס כולל עדכונים
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            ליווי אישי מיקיר עבאדי
+          </li>
+        </ul>
+        <button class="pricing-cta pulse-btn">אני רוצה להצטרף עכשיו</button>
+        <div class="pricing-guarantee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          רכישה מאובטחת • תשלום חד-פעמי בלבד
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq section">
+  <div class="container">
+    <div class="faq-header text-center fade-up">
+      <span class="badge">שאלות נפוצות</span>
+      <h2>יש לך שאלות? יש לנו תשובות</h2>
+      <p>התשובות לשאלות הכי נפוצות שאנחנו מקבלים</p>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          האם צריך ניסיון קודם?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          ממש לא! הקורס מתחיל מאפס ומלווה אותך צעד אחר צעד. גם אם מעולם לא שמעת על Polymarket — תצא מהקורס עם ביטחון מלא לסחור.
+        </div></div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          כמה זמן לוקח לעבור את הקורס?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          הקורס מכיל למעלה מ-50 שיעורים. אתה יכול לעבור אותו בקצב שלך — יש גישה לצמיתות. רוב התלמידים מסיימים תוך 2-4 שבועות.
+        </div></div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          כמה כסף צריך כדי להתחיל לסחור?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          אפשר להתחיל עם סכום קטן מאוד — אפילו $50. הקורס מלמד אותך איך לנהל את ההון שלך בצורה חכמה, ולגדול בהדרגה.
+        </div></div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          האם Polymarket חוקי?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Polymarket פועלת מחוץ לארה״ב ופתוחה למשתמשים מכל העולם. הקורס כולל פרק מלא על ההיבטים הרגולטוריים והמשפטיים שחשוב להכיר.
+        </div></div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          מה זה מערכת "רדאר הכסף"?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          רדאר הכסף (TrueOdds) היא מערכת ישראלית בעברית שעוקבת אחרי "הכסף החכם" — הארנקים הגדולים והמנצחים ב-Polymarket. המערכת מסננת רעשים, מזהה מהלכים של לוויתנים וצלפים, ומאפשרת לך לראות מה השחקנים הגדולים עושים בזמן אמת. כל תלמיד מקבל 6 חודשי גישה חינם.
+        </div></div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          לכמה זמן הגישה לקורס?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          הגישה היא לצמיתות! קנית פעם אחת — ולומד מתי שנוח לך. בנוסף, כל עדכון שיתווסף לקורס בעתיד נכנס אוטומטית לחשבון שלך.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="final-cta-inner fade-up">
+      <h2>מוכן להתחיל להרוויח משוקי חיזוי?</h2>
+      <p>הצטרף עכשיו ל-Polymarket Master וקבל את כל הכלים, הידע והליווי שאתה צריך כדי להצליח.</p>
+      <button class="btn-primary pulse-btn" onclick="document.querySelector('.pricing').scrollIntoView({behavior:'smooth'})" style="font-size: 20px; padding: 18px 48px;">
+        להרשמה לקורס
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l-7 7 7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 Polymarket Master — כל הזכויות שמורות | <a href="#">יקיר עבאדי</a></p>
+    <p style="margin-top: 8px; font-size: 12px;">
+      * ההשקעה בשוקי חיזוי כרוכה בסיכון. הקורס מספק ידע וכלים אך אינו מהווה ייעוץ השקעות.
+    </p>
+  </div>
+</footer>
+
+<script>
+// FAQ Toggle
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isActive = item.classList.contains('active');
+
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('active');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+
+  if (!isActive) {
+    item.classList.add('active');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// Scroll Animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 50) {
+    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
